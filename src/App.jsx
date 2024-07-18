@@ -16,14 +16,20 @@ function App() {
 
   function handleCheck(id) {
     setItems(items => items.map(item => item.id === id ? { ...item, packed: !item.packed } : item));
+  };
+
+  function clearItems() {
+    const confirmed = window.confirm("Are you sure?");
+
+    if (confirmed) setItems([]);
   }
 
   return (
     <div className='app'>
       <Logo />
       <Form onAddItem={handleItems} />
-      <PackagingList items={items} onCheck={handleCheck} onCloseItem={deleteItems} />
-      <Footer />
+      <PackagingList items={items} onCheck={handleCheck} onCloseItem={deleteItems} onClear={clearItems} />
+      <Footer items={items} />
     </div>
   )
 };
